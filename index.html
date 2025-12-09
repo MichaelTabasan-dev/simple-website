@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Structures & Algorithms - Group Project</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">DS & Algorithms</h1>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#algorithms">Algorithms</a></li>
+                <li><a href="#pseudocode">Pseudocode</a></li>
+                <li><a href="#data-structures">Data Structures</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Data Structures & Algorithms</h1>
+            <p>Comprehensive guide to algorithms, pseudocode, and data structure implementations</p>
+        </div>
+    </section>
+
+    <section id="algorithms" class="section">
+        <div class="container">
+            <h2>10 Essential Algorithms</h2>
+            <div class="algorithm-grid">
+                <div class="card">
+                    <h3>1. Binary Search</h3>
+                    <p>Efficiently search for an element in a sorted array</p>
+                    <div class="code-block">
+                        <pre><code class="language-python">def binary_search(arr, target):
+    left, right = 0, len(arr) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1</code></pre>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>2. Bubble Sort</h3>
+                    <p>Simple sorting algorithm that repeatedly steps through the list</p>
+                    <div class="code-block">
+                        <pre><code class="language-python">def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+    return arr</code></pre>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>3. Quick Sort</h3>
+                    <p>Divide and conquer sorting algorithm</p>
+                    <div class="code-block">
+                        <pre><code class="language-python">def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+    return quick_sort(left) + middle + quick_sort(right)</code></pre>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>4. Merge Sort</h3>
+                    <p>Efficient, stable sorting algorithm using divide and conquer</p>
+                    <div class="code-block">
+                        <pre><code class="language-python">def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
+    return merge(left, right)
+
+def merge(left, right):
+    result = []
+    i = j = 0
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    result.extend(left[i:])
+    result.extend(right[j:])
+    return result</code></pre>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>5. Linear Search</h3>
+                    <p>Simple search algorithm that checks each element sequentially</p>
+                    <div class="code-block">
+                        <pre><code class="language-python">def linear_search(arr, target):
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return i
+    return -1</code></pre>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>6. Insertion Sort</h3>
+                    <p>Builds sorted array one item at a time</p>
+                    <div class="code-block">
+                        <pre><code class="language-python">def insertion_sort(arr):
+    for i in range(1, len(arr)):
+        key = arr[i]
+        j = i - 1
+        while j >= 0 and arr[j] > key:
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j + 1] = key
+    return arr</code></pre>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>7. Selection Sort</h3>
+                    <p>Finds minimum element and places it at the beginning</p>
+                    <div class="code-block">
+                        <pre><code class="language-python">def selection_sort(arr):
+    for i in range(len(arr)):
+        min_idx = i
+        for j in range(i + 1, len(arr)):
+            if arr[j] < arr[min_idx]:
+                min_idx = j
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+    return arr</code></pre>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>8. Depth-First Search (DFS)</h3>
+                    <p>Graph traversal algorithm using recursion or stack</p>
+                    <div class="code-block">
+                        <pre><code class="language-python">def dfs(graph, start, visited=None):
+    if visited is None:
+        visited = set()
+    visited.add(start)
+    print(start, end=' ')
+    for neighbor in graph[start]:
+        if neighbor not in visited:
+            dfs(graph, neighbor, visited)
+    return visited</code></pre>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>9. Breadth-First Search (BFS)</h3>
+                    <p>Graph traversal algorithm using queue</p>
+                    <div class="code-block">
+                        <pre><code class="language-python">from collections import deque
+
+def bfs(graph, start):
+    visited = set()
+    queue = deque([start])
+    visited.add(start)
+    while queue:
+        vertex = queue.popleft()
+        print(vertex, end=' ')
+        for neighbor in graph[vertex]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append(neighbor)
+    return visited</code></pre>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>10. Fibonacci Sequence</h3>
+                    <p>Calculate Fibonacci numbers using dynamic programming</p>
+                    <div class="code-block">
+                        <pre><code class="language-python">def fibonacci(n):
+    if n <= 1:
+        return n
+    dp = [0] * (n + 1)
+    dp[1] = 1
+    for i in range(2, n + 1):
+        dp[i] = dp[i - 1] + dp[i - 2]
+    return dp[n]</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pseudocode" class="section">
+        <div class="container">
+            <h2>10 Pseudocode Examples</h2>
+            <div class="pseudocode-grid">
+                <div class="card">
+                    <h3>1. Find Maximum Element</h3>
+                    <div class="pseudocode">
+                        <pre>FUNCTION findMax(array)
+    SET max = array[0]
+    FOR i = 1 TO length(array) - 1
+        IF array[i] > max THEN
+            max = array[i]
+        END IF
+    END FOR
+    RETURN max
+END FUNCTION</pre>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>2. Calculate Factorial</h3>
+                    <div class="pseudocode">
+                        <pre>FUNCTION factorial(n)
+    IF n <= 1 THEN
+        RETURN 1
+    ELSE
+        RETURN n * factorial(n - 1)
+    END IF
+END FUNCTION</pre>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>3. Check Prime Number</h3>
+                    <div class="pseudocode">
+                        <pre>FUNCTION isPrime(n)
+    IF n < 2 THEN
+        RETURN FALSE
+    END IF
+    FOR i = 2 TO sqrt(n)
+        IF n MOD i == 0 THEN
+            RETURN FALSE
+        END IF
+    END FOR
+    RETURN TRUE
+END FUNCTION</pre>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>4. Reverse Array</h3>
+                    <div class="pseudocode">
+                        <pre>FUNCTION reverseArray(array)
+    SET left = 0
+    SET right = length(array) - 1
+    WHILE left < right DO
+        SWAP array[left] AND array[right]
+        left = left + 1
+        right = right - 1
+    END WHILE
+    RETURN array
+END FUNCTION</pre>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>5. Calculate Sum of Array</h3>
+                    <div class="pseudocode">
+                        <pre>FUNCTION sumArray(array)
+    SET sum = 0
+    FOR i = 0 TO length(array) - 1
+        sum = sum + array[i]
+    END FOR
+    RETURN sum
+END FUNCTION</pre>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>6. Find Element in Array</h3>
+                    <div class="pseudocode">
+                        <pre>FUNCTION findElement(array, target)
+    FOR i = 0 TO length(array) - 1
+        IF array[i] == target THEN
+            RETURN i
+        END IF
+    END FOR
+    RETURN -1
+END FUNCTION</pre>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>7. Count Occurrences</h3>
+                    <div class="pseudocode">
+                        <pre>FUNCTION countOccurrences(array, target)
+    SET count = 0
+    FOR i = 0 TO length(array) - 1
+        IF array[i] == target THEN
+            count = count + 1
+        END IF
+    END FOR
+    RETURN count
+END FUNCTION</pre>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>8. Calculate Average</h3>
+                    <div class="pseudocode">
+                        <pre>FUNCTION calculateAverage(array)
+    SET sum = 0
+    FOR i = 0 TO length(array) - 1
+        sum = sum + array[i]
+    END FOR
+    RETURN sum / length(array)
+END FUNCTION</pre>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>9. Check Palindrome</h3>
+                    <div class="pseudocode">
+                        <pre>FUNCTION isPalindrome(string)
+    SET left = 0
+    SET right = length(string) - 1
+    WHILE left < right DO
+        IF string[left] != string[right] THEN
+            RETURN FALSE
+        END IF
+        left = left + 1
+        right = right - 1
+    END WHILE
+    RETURN TRUE
+END FUNCTION</pre>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>10. Find Minimum Element</h3>
+                    <div class="pseudocode">
+                        <pre>FUNCTION findMin(array)
+    SET min = array[0]
+    FOR i = 1 TO length(array) - 1
+        IF array[i] < min THEN
+            min = array[i]
+        END IF
+    END FOR
+    RETURN min
+END FUNCTION</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="data-structures" class="section">
+        <div class="container">
+            <h2>Data Structures Implementation</h2>
+            
+            <div class="ds-section">
+                <h3>1. Array</h3>
+                <div class="code-block">
+                    <pre><code class="language-python">class Array:
+    def __init__(self, size):
+        self.size = size
+        self.data = [None] * size
+        self.length = 0
+    
+    def insert(self, index, value):
+        if 0 <= index <= self.length and self.length < self.size:
+            for i in range(self.length, index, -1):
+                self.data[i] = self.data[i - 1]
+            self.data[index] = value
+            self.length += 1
+            return True
+        return False
+    
+    def delete(self, index):
+        if 0 <= index < self.length:
+            for i in range(index, self.length - 1):
+                self.data[i] = self.data[i + 1]
+            self.length -= 1
+            return True
+        return False
+    
+    def get(self, index):
+        if 0 <= index < self.length:
+            return self.data[index]
+        return None
+    
+    def display(self):
+        return [self.data[i] for i in range(self.length)]
+
+# Example usage
+arr = Array(10)
+arr.insert(0, 10)
+arr.insert(1, 20)
+arr.insert(2, 30)
+print(arr.display())  # [10, 20, 30]</code></pre>
+                </div>
+            </div>
+
+            <div class="ds-section">
+                <h3>2. Stacks - Infix, Prefix, Postfix</h3>
+                <div class="code-block">
+                    <pre><code class="language-python">class Stack:
+    def __init__(self):
+        self.items = []
+    
+    def push(self, item):
+        self.items.append(item)
+    
+    def pop(self):
+        return self.items.pop() if not self.is_empty() else None
+    
+    def peek(self):
+        return self.items[-1] if not self.is_empty() else None
+    
+    def is_empty(self):
+        return len(self.items) == 0
+    
+    def size(self):
+        return len(self.items)
+
+# Infix to Postfix Conversion
+def infix_to_postfix(infix):
+    precedence = {'+': 1, '-': 1, '*': 2, '/': 2, '^': 3}
+    stack = Stack()
+    postfix = []
+    
+    for char in infix:
+        if char.isalnum():
+            postfix.append(char)
+        elif char == '(':
+            stack.push(char)
+        elif char == ')':
+            while not stack.is_empty() and stack.peek() != '(':
+                postfix.append(stack.pop())
+            stack.pop()
+        else:
+            while (not stack.is_empty() and 
+                   stack.peek() != '(' and 
+                   precedence.get(char, 0) <= precedence.get(stack.peek(), 0)):
+                postfix.append(stack.pop())
+            stack.push(char)
+    
+    while not stack.is_empty():
+        postfix.append(stack.pop())
+    
+    return ''.join(postfix)
+
+# Infix to Prefix Conversion
+def infix_to_prefix(infix):
+    infix = infix[::-1]
+    infix = infix.replace('(', 'temp').replace(')', '(').replace('temp', ')')
+    postfix = infix_to_postfix(infix)
+    return postfix[::-1]
+
+# Evaluate Postfix Expression
+def evaluate_postfix(postfix):
+    stack = Stack()
+    for char in postfix:
+        if char.isdigit():
+            stack.push(int(char))
+        else:
+            b = stack.pop()
+            a = stack.pop()
+            if char == '+':
+                stack.push(a + b)
+            elif char == '-':
+                stack.push(a - b)
+            elif char == '*':
+                stack.push(a * b)
+            elif char == '/':
+                stack.push(a / b)
+    return stack.pop()
+
+# Example usage
+infix = "A+B*C"
+print(f"Infix: {infix}")
+print(f"Postfix: {infix_to_postfix(infix)}")
+print(f"Prefix: {infix_to_prefix(infix)}")</code></pre>
+                </div>
+            </div>
+
+            <div class="ds-section">
+                <h3>3. Queues</h3>
+                <div class="code-block">
+                    <pre><code class="language-python">class Queue:
+    def __init__(self, size):
+        self.size = size
+        self.queue = [None] * size
+        self.front = 0
+        self.rear = -1
+        self.count = 0
+    
+    def enqueue(self, item):
+        if self.is_full():
+            return False
+        self.rear = (self.rear + 1) % self.size
+        self.queue[self.rear] = item
+        self.count += 1
+        return True
+    
+    def dequeue(self):
+        if self.is_empty():
+            return None
+        item = self.queue[self.front]
+        self.queue[self.front] = None
+        self.front = (self.front + 1) % self.size
+        self.count -= 1
+        return item
+    
+    def peek(self):
+        return self.queue[self.front] if not self.is_empty() else None
+    
+    def is_empty(self):
+        return self.count == 0
+    
+    def is_full(self):
+        return self.count == self.size
+    
+    def display(self):
+        result = []
+        for i in range(self.count):
+            idx = (self.front + i) % self.size
+            result.append(self.queue[idx])
+        return result
+
+# Example usage
+q = Queue(5)
+q.enqueue(10)
+q.enqueue(20)
+q.enqueue(30)
+print(q.display())  # [10, 20, 30]
+print(q.dequeue())  # 10
+print(q.display())  # [20, 30]</code></pre>
+                </div>
+            </div>
+
+            <div class="ds-section">
+                <h3>4. Trees - Inorder, Preorder, Postorder</h3>
+                <div class="code-block">
+                    <pre><code class="language-python">class TreeNode:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BinaryTree:
+    def __init__(self):
+        self.root = None
+    
+    def insert(self, data):
+        if self.root is None:
+            self.root = TreeNode(data)
+        else:
+            self._insert_recursive(self.root, data)
+    
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = TreeNode(data)
+            else:
+                self._insert_recursive(node.left, data)
+        else:
+            if node.right is None:
+                node.right = TreeNode(data)
+            else:
+                self._insert_recursive(node.right, data)
+    
+    # Inorder Traversal (Left, Root, Right)
+    def inorder(self, node=None):
+        if node is None:
+            node = self.root
+        result = []
+        if node:
+            result.extend(self.inorder(node.left))
+            result.append(node.data)
+            result.extend(self.inorder(node.right))
+        return result
+    
+    # Preorder Traversal (Root, Left, Right)
+    def preorder(self, node=None):
+        if node is None:
+            node = self.root
+        result = []
+        if node:
+            result.append(node.data)
+            result.extend(self.preorder(node.left))
+            result.extend(self.preorder(node.right))
+        return result
+    
+    # Postorder Traversal (Left, Right, Root)
+    def postorder(self, node=None):
+        if node is None:
+            node = self.root
+        result = []
+        if node:
+            result.extend(self.postorder(node.left))
+            result.extend(self.postorder(node.right))
+            result.append(node.data)
+        return result
+
+# Example usage
+tree = BinaryTree()
+tree.insert(50)
+tree.insert(30)
+tree.insert(70)
+tree.insert(20)
+tree.insert(40)
+tree.insert(60)
+tree.insert(80)
+
+print(f"Inorder: {tree.inorder()}")    # [20, 30, 40, 50, 60, 70, 80]
+print(f"Preorder: {tree.preorder()}")  # [50, 30, 20, 40, 70, 60, 80]
+print(f"Postorder: {tree.postorder()}") # [20, 40, 30, 60, 80, 70, 50]</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Data Structures & Algorithms Group Project. Ready for web hosting.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
